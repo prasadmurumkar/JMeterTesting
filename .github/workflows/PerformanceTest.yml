@@ -24,7 +24,8 @@ jobs:
       - name: Run JMeter Test
         run: |
           jmeter -n -t sample.jmx -l results.jtl \
-          -Jxstream.allow=org.apache.jmeter.save.ScriptWrapper
+          -Jxstream.allow=org.apache.jmeter.save.ScriptWrapper \
+          -j jmeter.log
 
       - name: Upload Results
         uses: actions/upload-artifact@v6
