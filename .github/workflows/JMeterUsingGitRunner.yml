@@ -1,4 +1,4 @@
-name: Performance Test
+name: JMeterUsingGitRunner
 
 on:
   workflow_dispatch:   # manual trigger
