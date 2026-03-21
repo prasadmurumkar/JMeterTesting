@@ -1,0 +1,4 @@
+Questions
+1> where multiple containers run in parallel and try to write to the same results file
+2> how can we do flow automatics in a way to achive CI/CD
+3> how to runn the test using multiple containers
