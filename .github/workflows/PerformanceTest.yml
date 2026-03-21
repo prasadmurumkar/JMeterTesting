@@ -23,7 +23,7 @@ jobs:
 
       - name: Run JMeter Test
         run: |
-          jmeter -n -t CSVSample.jmx -l results.jtl
+          JVM_ARGS="-Dxstream.security=false" jmeter -n -t CSVSample.jmx -l results.jtl
 
       - name: Upload Results
         uses: actions/upload-artifact@v6
