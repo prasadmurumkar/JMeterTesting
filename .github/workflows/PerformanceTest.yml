@@ -15,12 +15,12 @@ jobs:
 
       - name: Run JMeter in Docker
         run: |
-          docker run --rm \
-            -v ${{ github.workspace }}:/test \
-            justb4/jmeter:5.6.3 \
-            -n \
-            -t /test/sample.jmx \
-            -l /test/results.jtl \
+          docker run --rm `
+            -v "${{ github.workspace }}:/test" `
+            justb4/jmeter:5.6.3 `
+            -n `
+            -t /test/sample.jmx `
+            -l /test/results.jtl `
             -j /test/jmeter.log
 
       - name: Print logs
