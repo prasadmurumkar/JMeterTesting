@@ -1,4 +1,4 @@
-name: Performance Test
+name: JMeterUsingDocker
 
 on:
   workflow_dispatch:   # manual trigger
