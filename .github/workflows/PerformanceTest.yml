@@ -24,7 +24,7 @@ jobs:
 
       - name: Run JMeter Test
         run: |
-          $JMETER_HOME/bin/jmeter -n -t CSVSample.jmx -l results.jtl -j jmeter.log
+          $JMETER_HOME/bin/jmeter -n -t sample.jmx -l results.jtl -j jmeter.log
           
 
       - name: Print logs
