@@ -27,6 +27,9 @@ jobs:
           -Jxstream.allow=org.apache.jmeter.save.ScriptWrapper \
           -j jmeter.log
 
+      - name: Print logs
+        run: cat jmeter.log
+
       - name: Upload Results
         uses: actions/upload-artifact@v6
         with:
