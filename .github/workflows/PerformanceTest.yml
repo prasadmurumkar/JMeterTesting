@@ -5,27 +5,23 @@ on:
   push:
     branches: [main]
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   jmeter-test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
-      - name: Install JMeter (latest)
+      - name: Run JMeter in Docker
         run: |
-          wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.tgz
-          tar -xzf apache-jmeter-5.6.3.tgz
-          echo "JMETER_HOME=$(pwd)/apache-jmeter-5.6.3" >> $GITHUB_ENV
-
-      - name: Run JMeter Test
-        run: |
-          $JMETER_HOME/bin/jmeter -n -t sample.jmx -l results.jtl -j jmeter.log
-          
+          docker run --rm \
+            -v ${{ github.workspace }}:/test \
+            justb4/jmeter:5.6.3 \
+            -n \
+            -t /test/sample.jmx \
+            -l /test/results.jtl \
+            -j /test/jmeter.log
 
       - name: Print logs
         run: cat jmeter.log
