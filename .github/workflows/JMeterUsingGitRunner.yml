@@ -1,0 +1,39 @@
+name: Performance Test
+
+on:
+  workflow_dispatch:   # manual trigger
+  push:
+    branches: [main]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  jmeter-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Install JMeter (latest)
+        run: |
+          wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.tgz
+          tar -xzf apache-jmeter-5.6.3.tgz
+          echo "JMETER_HOME=$(pwd)/apache-jmeter-5.6.3" >> $GITHUB_ENV
+
+      - name: Run JMeter Test
+        run: |
+          $JMETER_HOME/bin/jmeter -n -t sample.jmx -l results.jtl -j jmeter.log
+          
+
+      - name: Print logs
+        run: cat jmeter.log
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: jmeter-results
+          path: |
+            results.jtl
+            jmeter.log
